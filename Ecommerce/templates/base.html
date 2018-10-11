@@ -1,7 +1,8 @@
-{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -85,10 +86,5 @@
     <div class="container">
         {% block content %} {% endblock %}  
     </div>
-    <footer>
-        <div class="container text-center">
-            <p>Code Institute Django eCommerce Project - Conor Clarke</p>
-        </div>
-    </footer>
 </body>
 </html>

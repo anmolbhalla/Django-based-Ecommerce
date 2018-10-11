@@ -7,6 +7,7 @@ from django.urls import reverse
 from .forms import UserLoginForm, UserRegistrationForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
+from .models import userAccounts
 
 
 # Create your views here.
@@ -46,12 +47,16 @@ def register(request):
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
             user_form.save()
+            user_name=request.POST.get('username')
+            password=request.POST.get('password1')
 
             user = auth.authenticate(username=request.POST.get('username'),
                                      password=request.POST.get('password1'))
 
             if user:
                 auth.login(request, user)
+                insertAccount=userAccounts.objects.create(userName=user_name,password=password)
+                insertAccount.save()
                 messages.success(request, "You have successfully registered")
 
                 if request.GET and request.GET['next'] != '':
